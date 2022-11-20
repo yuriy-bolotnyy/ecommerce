@@ -9,12 +9,14 @@ function App() {
         <div>
           <Header />
             <Switch>  
-              <Route exact path="/">
-                <Photos />
-              </Route>
-              <Route exact path="/cart">
-                <Cart />
-              </Route>         
+
+                <Route exact path="/">
+                    <Photos />
+                </Route>
+                <Route exact path="/cart">
+                    <Cart />
+                </Route> 
+                    
             </Switch>
         </div>
     )
