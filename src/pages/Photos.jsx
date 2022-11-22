@@ -1,33 +1,20 @@
-import React from "react"
+import React, {useContext} from "react"
+import {Context} from "../Context"
 
 import Image from "../components/Image"
-import {ContextConsumer} from "../Context"
 import {getClass} from "../utils"
 
 function Photos() {
+    const {allPhotos} = useContext(Context)
+    console.log(`Context consumed: ${JSON.stringify(allPhotos)}`)
+
     return (
         <main className="photos">
             <h1>Images go here</h1>
-            <ContextConsumer>
-                {context => {
-                    console.log(`Consumed Context: ${JSON.stringify(context.allPhotos)}`)
-                    // console.log(JSON.stringify(context.allPhotos[0]))
 
-                    // context.allPhotos.forEach(element => {
-                    //     console.log(element)
-                    // });
-
-                    const allImages = context.allPhotos.map(el => (
+            {allPhotos.map(el => (
                         <img src={`${el.url}`} alt={`${el.id}`} className="image-grid"  key={`${el.id}`}/>
-                    ))
-
-                    // console.log(allImages)
-
-                    return (
-                        <div>{allImages}</div>
-                    )
-                }}
-            </ContextConsumer>
+                    ))}
         </main> 
     )
 }
