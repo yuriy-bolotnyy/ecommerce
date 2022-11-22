@@ -2,18 +2,18 @@ import React, {Component, useEffect, useState} from "react"
 
 const {Provider, Consumer} = React.createContext()
 
+const URL = 'https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json'
+
 const ContextProvider = ({children}) => {
     const [allPhotos, setAllPhotos] = useState([])
 
     const updatePhotos = (photos) => setAllPhotos(photos)
 
     async function fetchAllPhotosJSON() {
-        const response = await fetch('https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json');
+        const response = await fetch(URL);
         const allPhotos = await response.json();
         return allPhotos;
     }
-
-   
 
     useEffect(() => {
         // on ComponentDidMount
@@ -31,11 +31,11 @@ const ContextProvider = ({children}) => {
     }, []);
 
     useEffect(() => {
-        console.log(allPhotos)
+        // console.log(allPhotos)
     }, [allPhotos])
 
     return (
-        <Provider value={{allPhotos, updatePhotos}}>
+        <Provider value={{allPhotos}}>
             {children}
         </Provider>
     )
