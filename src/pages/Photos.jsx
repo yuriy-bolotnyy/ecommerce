@@ -9,8 +9,9 @@ function Photos() {
         <main className="photos">
             <h1>Images go here</h1>
             <ContextConsumer>
-                {allPhotos => {
-                    console.table(`Consumed Context: ${JSON.stringify(allPhotos)}`)
+                {context => {
+                    // console.log(`Consumed Context: ${JSON.stringify(context.allPhotos)}`)
+                    console.log(JSON.stringify(context.allPhotos[0]))
                     return (
                         <div></div>
                     )
