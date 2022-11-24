@@ -1,25 +1,25 @@
 import React, {useState} from "react"
 
-export default function Image({img, className}) {
+export default function Image({img, className, toggleFavorite}) {
 
     const [hovered, setHovered] = useState(false)
 
-    const favoriteIcon = hovered && <i className="ri-heart-line favorite"></i>
+    const favoriteIcon = (hovered|img.isFavorite) && <i className="ri-heart-line favorite" onClick={toggleFavorite}></i>
     const heartIcon = hovered && <i className="ri-add-circle-line cart"></i>
 
-    const mouseEnter = () => {
-        setHovered(true)
-    }
+    {() => setHovered(true)} 
 
-    const mouseLeave = () => {
-        setHovered(false)
-    }
-
-    console.log(`Image id ${img.id} Hovered: ${hovered}`)
+    console.log(`Image id ${img.id} | Hovered: ${hovered} | isFavorite: ${img.isFavorite}`)
 
     return (
         <div className={`${className} image-container`}>
-            <img src={img.url} alt={img.url} className="image-grid" onMouseOver={mouseEnter} onMouseLeave={mouseLeave}/>
+            <img 
+                src={img.url} 
+                alt={img.url} 
+                className="image-grid" 
+                onMouseEnter={() => {setHovered(true); event.preventDefault()}} 
+                onMouseLeave={() => {setHovered(false); event.preventDefault()}} 
+            />
             {favoriteIcon}
             {heartIcon}
         </div>

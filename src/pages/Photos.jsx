@@ -5,7 +5,7 @@ import Image from "../components/Image"
 import {getClass} from "../utils"
 
 function Photos() {
-    const {allPhotos} = useContext(Context)
+    const {allPhotos, toggleFavorite} = useContext(Context)
     console.log(`Context consumed: ${JSON.stringify(allPhotos)}`)
 
     return (
@@ -13,9 +13,8 @@ function Photos() {
             <h1>Images go here</h1>
 
             {allPhotos.map((img, i) => (
-                        // <img src={`${img.url}`} alt={`${img.id}`} className="image-grid"  key={`${img.id}`}/>
-                        <Image key={img.id} img={img} className={getClass(i)}/>
-                    ))}
+                <Image key={img.id} img={img} toggleFavorite={() => toggleFavorite(img.id)} className={getClass(i)}/>
+            ))}
         </main> 
     )
 }
