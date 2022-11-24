@@ -12,8 +12,9 @@ function Photos() {
         <main className="photos">
             <h1>Images go here</h1>
 
-            {allPhotos.map(el => (
-                        <img src={`${el.url}`} alt={`${el.id}`} className="image-grid"  key={`${el.id}`}/>
+            {allPhotos.map((img, i) => (
+                        // <img src={`${img.url}`} alt={`${img.id}`} className="image-grid"  key={`${img.id}`}/>
+                        <Image key={img.id} img={img} className={getClass(i)}/>
                     ))}
         </main> 
     )
