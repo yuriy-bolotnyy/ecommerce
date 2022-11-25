@@ -29,7 +29,8 @@ const ContextProvider = ({children}) => {
     const toggleFavorite = (id) => {
         console.log(`Toggle favorite for id ${id}`)
 
-        setAllPhotos(prevPhotos => prevPhotos.map(photo => (photo.id === id ?
+        setAllPhotos(prevPhotos => prevPhotos.map(photo => (
+            photo.id === id ?
                 {...photo, isFavorite: !photo.isFavorite} 
                 :photo)
         ))

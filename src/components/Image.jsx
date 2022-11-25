@@ -1,15 +1,21 @@
 import React, {useState, useContext} from "react"
 import {Context} from "../Context"
+import PropTypes from "prop-types"
 
 export default function Image({img, className}) {
     const {toggleFavorite} = useContext(Context)
 
     const [hovered, setHovered] = useState(false)
 
-    const favoriteIcon = (hovered|img.isFavorite) && <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
-    const heartIcon = hovered && <i className="ri-add-circle-line cart"></i>
+    function heartIcon() {
+        if(img.isFavorite) {
+            return <i className="ri-heart-fill favorite" onClick={() => toggleFavorite(img.id)}></i>
+        } else if(hovered) {
+            return <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)}></i>
+        }
+    }
 
-    {() => setHovered(true)} 
+    const cartIcon = hovered && <i className="ri-add-circle-line cart"></i>
 
     console.log(`Image id ${img.id} | Hovered: ${hovered} | isFavorite: ${img.isFavorite}`)
 
@@ -19,11 +25,21 @@ export default function Image({img, className}) {
                 src={img.url} 
                 alt={img.url} 
                 className="image-grid" 
-                onMouseEnter={() => {setHovered(true); event.preventDefault()}} 
+                onMouseOver={() => {setHovered(true); event.preventDefault()}} 
                 onMouseLeave={() => {setHovered(false); event.preventDefault()}} 
             />
-            {favoriteIcon}
-            {heartIcon}
+            {heartIcon()}
+            {cartIcon}
         </div>
     )
+}
+
+Image.propTypes = {
+    className: PropTypes.string,
+
+    img: PropTypes.exact({
+        id: PropTypes.string,
+        url: PropTypes.string,
+        isFavorite: PropTypes.bool
+    })
 }
