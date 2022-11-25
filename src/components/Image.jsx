@@ -3,8 +3,7 @@ import {Context} from "../Context"
 import PropTypes from "prop-types"
 
 export default function Image({img, className}) {
-    const {toggleFavorite} = useContext(Context)
-
+    const {toggleFavorite, addImageToCart} = useContext(Context)
     const [hovered, setHovered] = useState(false)
 
     function heartIcon() {
@@ -15,7 +14,8 @@ export default function Image({img, className}) {
         }
     }
 
-    const cartIcon = hovered && <i className="ri-add-circle-line cart"></i>
+    const cartIcon = hovered && 
+        <i className="ri-add-circle-line cart" onClick={() => addImageToCart(img)}></i>
 
     console.log(`Image id ${img.id} | Hovered: ${hovered} | isFavorite: ${img.isFavorite}`)
 
