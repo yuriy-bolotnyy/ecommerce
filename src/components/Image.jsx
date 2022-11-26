@@ -3,7 +3,7 @@ import {Context} from "../Context"
 import PropTypes from "prop-types"
 
 export default function Image({img, className}) {
-    const {toggleFavorite, addImageToCart, cartItems} = useContext(Context)
+    const {toggleFavorite, addImageToCart, removeImageFromCart, cartItems} = useContext(Context)
     const [hovered, setHovered] = useState(false)
 
     function heartIcon() {
@@ -14,18 +14,37 @@ export default function Image({img, className}) {
         }
     }
 
+    const handleCartButtonClick = (e) => {
+        console.log(`Cart button clicked for image ${imageInCart()} in Cart...`)
+        if (imageInCart()) {
+            console.log('Calling removeItemFromCart ...')
+            removeImageFromCart(img)
+        } else {
+            console.log('Calling AddItemToCart ...')
+            addImageToCart(img)
+        }
+        e.preventDefault()
+    }
+
+    const imageInCart = () => cartItems.some(item => item.id === img.id)
+
     const cartIcon = () => {
         console.log(`${cartItems.length} items in Cart`)
         // let imgInCart = false
-        const imgInCart = cartItems.some(item => item.id === img.id)
+        // const imgInCart = cartItems.some(item => item.id === img.id)
         // console.log(`item in card => ${JSON.stringify(imgInCart)}`)
-        if (imgInCart) {
-            console.log(`img id ${img.id} is in Cart`)
-            return <i className="ri-shopping-cart-fill cart"></i>
+        let icon = ''
+        if (imageInCart()) {
+            // console.log(`img id ${img.id} is in Cart`)
+            icon = "ri-shopping-cart-fill"
+            // return <i className="ri-shopping-cart-fill cart" onClick={handleCartButtonClick}></i>
         }
         else if (hovered) {
-            return <i className="ri-add-circle-line cart" onClick={() => addImageToCart(img)}></i>
+            icon = "ri-add-circle-line"
+            // return <i className="ri-add-circle-line cart" onClick={handleCartButtonClick}></i>
         }
+
+        return <i className={`${icon} cart`} onClick={handleCartButtonClick}></i>
         
     }
     // console.log(`Image id ${img.id} | Hovered: ${hovered} | isFavorite: ${img.isFavorite}`)
@@ -36,7 +55,7 @@ export default function Image({img, className}) {
                 src={img.url} 
                 alt={img.url} 
                 className="image-grid" 
-                onMouseOver={() => {setHovered(true); event.preventDefault()}} 
+                onMouseEnter={() => {setHovered(true); event.preventDefault()}} 
                 onMouseLeave={() => {setHovered(false); event.preventDefault()}} 
             />
             {heartIcon()}
