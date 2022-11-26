@@ -48,8 +48,10 @@ const ContextProvider = ({children}) => {
         // console.log(`cartItems after: ${JSON.stringify(cartItems)}`)
     }
 
+    // {toggleFavorite, addImageToCart, cartItems}
+
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite, addImageToCart}}>
+        <Context.Provider value={{allPhotos, toggleFavorite, addImageToCart, cartItems}}>
             {children}
         </Context.Provider>
     )
