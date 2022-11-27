@@ -1,15 +1,15 @@
 import React, {useState, useContext, useEffect} from "react"
 import {Context} from "../Context"
 import PropTypes from "prop-types"
+import useHover from "../hooks/useHover"
 
 export default function Image({img, className}) {
     const {toggleFavorite, addImageToCart, removeImageFromCart, cartItems} = useContext(Context)
     const [hovered, setHovered] = useState(false)
     
-
-    useEffect(() => {
-        console.log(`id ${img.id} hoverd: ${hovered}`)
-    }, [hovered])
+    // useEffect(() => {
+    //     console.log(`id ${img.id} hoverd: ${hovered}`)
+    // }, [hovered])
 
     function heartIcon() {
         if(img.isFavorite) {
