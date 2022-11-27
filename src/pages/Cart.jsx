@@ -19,9 +19,11 @@ function Cart() {
     // const placeOrderBtn = document.querySelector('button')
 
     const placeOrder = () => {
-        // document.querySelector('button').textContent = "Ordering ..."
-        orderButtonRef.current.disabled = true
         cartTitleRef.current.textContent = "Ordering ..."
+
+        orderButtonRef.current.disabled = true
+        orderButtonRef.current.innerText = "Ordering ..."
+        
         setTimeout(() => {
             console.log('Order placed')
             cartTitleRef.current.textContent = "Order placed"
@@ -31,7 +33,9 @@ function Cart() {
 
     return (
         <main className="cart-page">
-            <h1 ref={cartTitleRef}>Check out</h1>
+            <h1 ref={cartTitleRef}>
+                {cartItems.length > 0 ? 'Check out' : 'No items selected yet'}
+            </h1>
             {cartItemElements}
             {cartItems.length > 0 
                  && <p className="total-cost">Total: {total}</p>}
