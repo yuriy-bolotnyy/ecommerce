@@ -1,4 +1,5 @@
 import React, {useContext, useRef} from "react"
+import { useHistory } from "react-router-dom"
 import {Context} from "../Context"
 import CartItem from "../components/CartItem"
 
@@ -6,6 +7,7 @@ function Cart() {
     const {cartItems, clearCart} = useContext(Context)
     const orderButtonRef = useRef(null)
     const cartTitleRef = useRef(null)
+    const history = useHistory()
 
     const cartItemElements = cartItems.map(item => (
         <CartItem key={item.id} item={item} />
@@ -29,6 +31,11 @@ function Cart() {
             cartTitleRef.current.textContent = "Order placed"
             clearCart()
         }, 3000)
+
+        setTimeout(() => {
+            console.log('Re-directing to home page ...')
+            history.push('/')
+        }, 7000)
     }
 
     return (
