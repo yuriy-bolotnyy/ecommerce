@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 export default function Image({img, className}) {
     const {toggleFavorite, addImageToCart, removeImageFromCart, cartItems} = useContext(Context)
     const [hovered, setHovered] = useState(false)
+    
 
     useEffect(() => {
         console.log(`id ${img.id} hoverd: ${hovered}`)
