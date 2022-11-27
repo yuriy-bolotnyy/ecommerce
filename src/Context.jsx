@@ -88,10 +88,12 @@ const ContextProvider = ({children}) => {
         // console.log(`cartItems after: ${JSON.stringify(cartItems)}`)
     }
 
+    const clearCart = () => setCartItems([])
+
     // {toggleFavorite, addImageToCart, cartItems}
 
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite, addImageToCart, removeImageFromCart, cartItems}}>
+        <Context.Provider value={{allPhotos, toggleFavorite, addImageToCart, removeImageFromCart, clearCart, cartItems}}>
             {children}
         </Context.Provider>
     )
