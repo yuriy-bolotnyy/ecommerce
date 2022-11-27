@@ -5,8 +5,8 @@ import useHover from "../hooks/useHover"
 function CartItem({item}) {
     const {removeImageFromCart} = useContext(Context)
     // const [hoverOverTrash, setHoverOverTrash] = useState[false]
-    const [hovered, setHovered] = useState(false)
-    // const [hovered, ref] = useHover()
+    // const [hovered, setHovered] = useState(false)
+    const [hovered, ref] = useHover()
 
     // Filled trash icon to use when hovering:
     // <i className="ri-delete-bin-fill"></i>
@@ -25,9 +25,9 @@ function CartItem({item}) {
         <div className="cart-item">
             <i className={trashIconClass}
                 onClick={() => removeImageFromCart(item)} 
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                // ref={ref}
+                // onMouseEnter={() => setHovered(true)}
+                // onMouseLeave={() => setHovered(false)}
+                ref={ref}
             >
             </i>
             <img src={item.url} width="130px" />

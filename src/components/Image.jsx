@@ -5,11 +5,12 @@ import useHover from "../hooks/useHover"
 
 export default function Image({className, img}) {
     const {toggleFavorite, addImageToCart, removeImageFromCart, cartItems} = useContext(Context)
-    const [hovered, setHovered] = useState(false)
+    // const [hovered, setHovered] = useState(false)
+    const [hovered, ref] = useHover()
     
-    useEffect(() => {
-        console.log(`id ${img.id} hoverd: ${hovered}`)
-    }, [hovered])
+    // useEffect(() => {
+    //     console.log(`id ${img.id} hoverd: ${hovered}`)
+    // }, [hovered])
 
     function heartIcon() {
         if(img.isFavorite) {
@@ -52,15 +53,11 @@ export default function Image({className, img}) {
     // }
 
     return (
-        <div className={`${className} image-container`}
-            onMouseEnter={() => setHovered(true)} 
-            onMouseLeave={() => setHovered(false)} 
+        <div 
+            className={`${className} image-container`}
+            ref={ref}
         >
-            <img 
-                src={img.url} 
-                alt={img.url} 
-                className="image-grid" 
-            />
+            <img src={img.url} className="image-grid"/>
             {heartIcon()}
             {cartIcon()}
         </div>
