@@ -1,10 +1,14 @@
-import React, {useState, useContext} from "react"
+import React, {useState, useContext, useEffect} from "react"
 import {Context} from "../Context"
 import PropTypes from "prop-types"
 
 export default function Image({img, className}) {
     const {toggleFavorite, addImageToCart, removeImageFromCart, cartItems} = useContext(Context)
     const [hovered, setHovered] = useState(false)
+
+    useEffect(() => {
+        console.log(`id ${img.id} hoverd: ${hovered}`)
+    }, [hovered])
 
     function heartIcon() {
         if(img.isFavorite) {
@@ -29,7 +33,7 @@ export default function Image({img, className}) {
     const imageInCart = () => cartItems.some(item => item.id === img.id)
 
     const cartIcon = () => {
-        console.log(`${cartItems.length} items in Cart`)
+        // console.log(`${cartItems.length} items in Cart`)
         // let imgInCart = false
         // const imgInCart = cartItems.some(item => item.id === img.id)
         // console.log(`item in card => ${JSON.stringify(imgInCart)}`)
