@@ -1,9 +1,12 @@
-import React, {useContext} from "react"
+import React, {useContext, useRef} from "react"
 import {Context} from "../Context"
 import CartItem from "../components/CartItem"
 
 function Cart() {
     const {cartItems, clearCart} = useContext(Context)
+    const orderButtonRef = useRef(null)
+    const cartTitleRef = useRef(null)
+
     const cartItemElements = cartItems.map(item => (
         <CartItem key={item.id} item={item} />
     ))
@@ -16,20 +19,25 @@ function Cart() {
     // const placeOrderBtn = document.querySelector('button')
 
     const placeOrder = () => {
-        document.querySelector('button').textContent = "Ordering ..."
+        // document.querySelector('button').textContent = "Ordering ..."
+        orderButtonRef.current.disabled = true
+        cartTitleRef.current.textContent = "Ordering ..."
         setTimeout(() => {
             console.log('Order placed')
+            cartTitleRef.current.textContent = "Order placed"
             clearCart()
         }, 3000)
     }
 
     return (
         <main className="cart-page">
-            <h1>Check out</h1>
+            <h1 ref={cartTitleRef}>Check out</h1>
             {cartItemElements}
-            <p className="total-cost">Total: {total}</p>
+            {cartItems.length > 0 
+                 && <p className="total-cost">Total: {total}</p>}
             <div className="order-button">
-                {cartItems.length > 0 && <button onClick={placeOrder}>Place Order</button>}
+                {cartItems.length > 0 
+                 && <button onClick={placeOrder} ref={orderButtonRef}>Place Order</button>}
             </div>
         </main>
     )
